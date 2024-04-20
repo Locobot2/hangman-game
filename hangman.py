@@ -2,7 +2,7 @@ import random, time, os, sys, pygame, keyboard
 
 pygame.init()
 
-with open("data/clean_words_alpha.txt", "r") as file: 
+with open("data/dict.txt", "r") as file: 
     allText = file.read() 
     words = list(map(str, allText.split())) 
 
@@ -128,9 +128,24 @@ def game():
     s5 = pygame.transform.scale(s5, (120, 120))
     s6 = pygame.transform.scale(s6, (120, 120))
 
-    def randomWord():
-        global word
-        word = (random.choice(words))
+    word = (random.choice(words))
+    # word = "abcdefghijklmnopqr"
+    print(word)
+    # lttrCount = 0
+    dashes = ""
+
+    for i in range(len(word)):
+        # lttrCount += 1
+        dashes = dashes + "_ "
+
+    pygame.font.init()
+    font = pygame.font.SysFont("Comic Sans MS", 30)
+    
+    text = font.render(dashes, False, (255, 255, 255))
+
+
+    # print(lttrCount)
+    # print(dashes)
     
     running = True
     while running:
@@ -161,6 +176,7 @@ def game():
             
         # randomWord()
         # print(word)
+        screen.blit(text, (0, 400))
         pygame.display.update()
 
 
