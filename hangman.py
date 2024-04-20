@@ -76,7 +76,6 @@ def mainMenu():
         screen.blit(text, (width/2-170, height/2-30))
         pygame.display.update()
     sys.exit(0)
-    # print(random.choice(words))
     
 def rules():
 
@@ -103,6 +102,35 @@ def rules():
     sys.exit(0)
     
 def game():
+
+    one = False
+    two = False
+    three = False
+    four = False
+    five = False
+    six = False
+
+    manStand = pygame.image.load("data/stick figure states/stand.png")
+    s1 = pygame.image.load("data/stick figure states/1.png")
+    s2 = pygame.image.load("data/stick figure states/2.png")
+    s3 = pygame.image.load("data/stick figure states/3.png")
+    s4 = pygame.image.load("data/stick figure states/4.png")
+    s5 = pygame.image.load("data/stick figure states/5.png")
+    s6 = pygame.image.load("data/stick figure states/6.png")
+
+    sWidth = manStand.get_width()
+    sHeight = manStand.get_height()
+    manStand = pygame.transform.scale(manStand, (int(sWidth * 2), int(sHeight * 2)))
+    s1 = pygame.transform.scale(s1, (120, 120))
+    s2 = pygame.transform.scale(s2, (120, 120))
+    s3 = pygame.transform.scale(s3, (120, 120))
+    s4 = pygame.transform.scale(s4, (120, 120))
+    s5 = pygame.transform.scale(s5, (120, 120))
+    s6 = pygame.transform.scale(s6, (120, 120))
+
+    def randomWord():
+        global word
+        word = (random.choice(words))
     
     running = True
     while running:
@@ -111,7 +139,31 @@ def game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        
+        screen.blit(manStand, (150, 60))
+        if one:
+            screen.blit(s1, (152, 90))
+        if two:
+            screen.blit(s2, (152, 90))
+            one=False
+        if three:
+            screen.blit(s3, (152, 90))
+            two = False
+        if four:
+            screen.blit(s4, (152, 90))
+            three = False
+        if five:
+            screen.blit(s5, (152, 90))
+            four = False
+        if six:
+            screen.blit(s6, (152, 90))
+            five = False
+
+            
+        # randomWord()
+        # print(word)
         pygame.display.update()
+
+
     sys.exit(0)
-mainMenu()
+# mainMenu()
+game()
