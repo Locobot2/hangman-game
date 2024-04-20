@@ -99,7 +99,6 @@ def rules():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        time.sleep(2)
         pygame.display.update()
     sys.exit(0)
     
