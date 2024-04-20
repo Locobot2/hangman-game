@@ -12,7 +12,7 @@ height = 600
 
 
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("mommy")
+pygame.display.set_caption("game")
 
 class Button():
     def __init__(self, x, y, image, scale):
