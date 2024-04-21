@@ -86,11 +86,17 @@ def rules():
 
     cont_button = Button(280, 380, play_img, 0.3)
     quit_button = Button(70, 380, quit_img, 0.3)
+
+    pygame.font.init()
+    font = pygame.font.SysFont("Comic Sans MS", 30)
+    
+    text = font.render("Rules:", False, (0, 0, 0))
+    text2 = font.render("*You have 6 guesses", False, (0, 0, 0))
+    text3 = font.render("*Have Fun", False, (0, 0, 0))
     
     running = True
     while running:
-        bg = pygame.image.load("data/rules.png")
-        screen.blit(bg, (0, 0))
+        screen.fill((255, 255, 255))
         
         if cont_button.draw():
             game()
@@ -100,6 +106,10 @@ def rules():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        screen.blit(text, (w/2-(text.get_width()/2), 30))
+        screen.blit(text2, (w/2-(text2.get_width()/2), 80))
+        screen.blit(text3, (w/2-(text3.get_width()/2), 130))
+
         pygame.display.update()
     sys.exit(0)
     
@@ -393,5 +403,6 @@ def endScreen(boolean):
         screen.blit(text2, (w/2-(text2.get_width()/2), h/2+20))
         pygame.display.update()
     sys.exit(0)
+
 # mainMenu()
-mainMenu()
+rules()
