@@ -129,19 +129,34 @@ def game():
     s6 = pygame.transform.scale(s6, (120, 120))
 
     word = (random.choice(words))
-    # word = "abcdefghijklmnopqr"
+    # word = "aaaaaaaaaaaaaaaaaaaa"
     print(word)
     # lttrCount = 0
+    global dashes
     dashes = ""
+    letterCount = 0
 
     for i in range(len(word)):
         # lttrCount += 1
-        dashes = dashes + "_ "
+        dashes = dashes + "_"
 
     pygame.font.init()
     font = pygame.font.SysFont("Comic Sans MS", 30)
     
     text = font.render(dashes, False, (255, 255, 255))
+
+    usedLttrs = []
+
+    def letterAdd(lttr):
+        global dashes
+        for letter in range(len(word)):
+            if word[letter] == lttr:
+                string_list = list(dashes)
+                string_list[letter] = "a"
+                dashes = "".join(string_list)
+        print(dashes)
+                
+                
 
 
     # print(lttrCount)
@@ -150,10 +165,109 @@ def game():
     running = True
     while running:
         screen.fill((0, 0, 0))
+        # print(usedLttrs)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    if "a" not in usedLttrs:
+                        letterAdd("a")
+                        usedLttrs.append("a")
+                        text = font.render(dashes, False, (255, 255, 255))
+#USE A FOR LOOP TO ITERATE THROUGHT THE WORD AND REPLACE IN DASHES
+
+
+
+
+
+
+
+
+
+                        
+                    # print(usedLttrs)
+
+
+
+
+                elif event.key == pygame.K_b:
+                    if "b" not in usedLttrs:
+                        usedLttrs.append("b")
+                elif event.key == pygame.K_c:
+                    if "c" not in usedLttrs:
+                        usedLttrs.append("c")
+                elif event.key == pygame.K_d:
+                    if "d" not in usedLttrs:
+                        usedLttrs.append("d")
+                elif event.key == pygame.K_e:
+                    if "e" not in usedLttrs:
+                        usedLttrs.append("e")
+                elif event.key == pygame.K_f:
+                    if "f" not in usedLttrs:
+                        usedLttrs.append("f")
+                elif event.key == pygame.K_g:
+                    if "g" not in usedLttrs:
+                        usedLttrs.append("g")
+                elif event.key == pygame.K_h:
+                    if "h" not in usedLttrs:
+                        usedLttrs.append("h")
+                elif event.key == pygame.K_i:
+                    if "i" not in usedLttrs:
+                        usedLttrs.append("i")
+                elif event.key == pygame.K_j:
+                    if "j" not in usedLttrs:
+                        usedLttrs.append("j")
+                elif event.key == pygame.K_k:
+                    if "k" not in usedLttrs:
+                        usedLttrs.append("k")
+                elif event.key == pygame.K_l:
+                    if "l" not in usedLttrs:
+                        usedLttrs.append("l")
+                elif event.key == pygame.K_m:
+                    if "m" not in usedLttrs:
+                        usedLttrs.append("m")
+                elif event.key == pygame.K_n:
+                    if "n" not in usedLttrs:
+                        usedLttrs.append("n")
+                elif event.key == pygame.K_o:
+                    if "o" not in usedLttrs:
+                        usedLttrs.append("o")
+                elif event.key == pygame.K_p:
+                    if "p" not in usedLttrs:
+                        usedLttrs.append("p")
+                elif event.key == pygame.K_q:
+                    if "q" not in usedLttrs:
+                        usedLttrs.append("q")
+                elif event.key == pygame.K_r:
+                    if "r" not in usedLttrs:
+                        usedLttrs.append("r")
+                elif event.key == pygame.K_s:
+                    if "s" not in usedLttrs:
+                        usedLttrs.append("s")
+                elif event.key == pygame.K_t:
+                    if "t" not in usedLttrs:
+                        usedLttrs.append("t")
+                elif event.key == pygame.K_u:
+                    if "u" not in usedLttrs:
+                        usedLttrs.append("u")
+                elif event.key == pygame.K_v:
+                    if "v" not in usedLttrs:
+                        usedLttrs.append("v")
+                elif event.key == pygame.K_w:
+                    if "w" not in usedLttrs:
+                        usedLttrs.append("w")
+                elif event.key == pygame.K_x:
+                    if "x" not in usedLttrs:
+                        usedLttrs.append("x")
+                elif event.key == pygame.K_y:
+                    if "y" not in usedLttrs:
+                        usedLttrs.append("y")
+                elif event.key == pygame.K_z:
+                    if "z" not in usedLttrs:
+                        usedLttrs.append("z")
         screen.blit(manStand, (150, 60))
         if one:
             screen.blit(s1, (152, 90))
