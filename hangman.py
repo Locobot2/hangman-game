@@ -404,5 +404,6 @@ def endScreen(boolean):
         pygame.display.update()
     sys.exit(0)
 
-# mainMenu()
-rules()
+mainMenu()
+
+#add a definition to the end screen for each word using web
