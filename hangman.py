@@ -1,3 +1,5 @@
+from os import environ
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 import random, time, os, sys, pygame, keyboard
 
 pygame.init()
@@ -6,12 +8,12 @@ with open("data/dict.txt", "r") as file:
     allText = file.read() 
     words = list(map(str, allText.split())) 
 
+global width
+w = 500
+h = 600
 
-width = 500
-height = 600
 
-
-screen = pygame.display.set_mode((width, height))
+screen = pygame.display.set_mode((w, h))
 pygame.display.set_caption("game")
 
 class Button():
@@ -73,7 +75,7 @@ def mainMenu():
             if event.type == pygame.QUIT:
                 running = False
                 
-        screen.blit(text, (width/2-170, height/2-30))
+        screen.blit(text, (w/2-(text.get_width()/2), h/2-30))
         pygame.display.update()
     sys.exit(0)
     
@@ -128,33 +130,40 @@ def game():
     s5 = pygame.transform.scale(s5, (120, 120))
     s6 = pygame.transform.scale(s6, (120, 120))
 
+    global word
     word = (random.choice(words))
     # word = "aaaaaaaaaaaaaaaaaaaa"
-    print(word)
+    # print(word)
     # lttrCount = 0
-    global dashes
+    global dashes, letterCount, text, text2
     dashes = ""
-    letterCount = 0
+    letterCount = len(word)
 
     for i in range(len(word)):
         # lttrCount += 1
         dashes = dashes + "_"
 
     pygame.font.init()
-    font = pygame.font.SysFont("Comic Sans MS", 30)
+    font = pygame.font.SysFont("Comic Sans MS", 35)
     
     text = font.render(dashes, False, (255, 255, 255))
+    text2 = font.render("letters remaining: " + str(letterCount), False, (255, 255, 255))
+    
 
     usedLttrs = []
 
     def letterAdd(lttr):
-        global dashes
+        global dashes, letterCount, text, text2
         for letter in range(len(word)):
             if word[letter] == lttr:
+                letterCount -= 1
                 string_list = list(dashes)
-                string_list[letter] = "a"
+                string_list[letter] = lttr
                 dashes = "".join(string_list)
-        print(dashes)
+                text = font.render(dashes, False, (255, 255, 255))
+                text2 = font.render("letters remaining: " + str(letterCount), False, (255, 255, 255))
+        usedLttrs.append(lttr)
+        # print(dashes)
                 
                 
 
@@ -164,6 +173,14 @@ def game():
     
     running = True
     while running:
+        lettersVar = ""
+        badLttr = 0
+
+        for i in usedLttrs:
+            if word.find(str(i)) == -1:
+                lettersVar = lettersVar + i
+                badLttr += 1
+        text3 = font.render("letters used: " + lettersVar, False, (255, 255, 255))
         screen.fill((0, 0, 0))
         # print(usedLttrs)
         
@@ -175,99 +192,122 @@ def game():
                 if event.key == pygame.K_a:
                     if "a" not in usedLttrs:
                         letterAdd("a")
-                        usedLttrs.append("a")
-                        text = font.render(dashes, False, (255, 255, 255))
-#USE A FOR LOOP TO ITERATE THROUGHT THE WORD AND REPLACE IN DASHES
-
-
-
-
-
-
-
-
-
-                        
-                    # print(usedLttrs)
-
-
-
 
                 elif event.key == pygame.K_b:
                     if "b" not in usedLttrs:
-                        usedLttrs.append("b")
+                        if "b" not in usedLttrs:
+                            letterAdd("b")
                 elif event.key == pygame.K_c:
                     if "c" not in usedLttrs:
-                        usedLttrs.append("c")
+                        if "c" not in usedLttrs:
+                            letterAdd("c")
                 elif event.key == pygame.K_d:
                     if "d" not in usedLttrs:
-                        usedLttrs.append("d")
+                        if "d" not in usedLttrs:
+                            letterAdd("d")
                 elif event.key == pygame.K_e:
                     if "e" not in usedLttrs:
-                        usedLttrs.append("e")
+                        if "e" not in usedLttrs:
+                            letterAdd("e")
                 elif event.key == pygame.K_f:
                     if "f" not in usedLttrs:
-                        usedLttrs.append("f")
+                        if "f" not in usedLttrs:
+                            letterAdd("f")
                 elif event.key == pygame.K_g:
                     if "g" not in usedLttrs:
-                        usedLttrs.append("g")
+                        if "g" not in usedLttrs:
+                            letterAdd("g")
                 elif event.key == pygame.K_h:
                     if "h" not in usedLttrs:
-                        usedLttrs.append("h")
+                        if "h" not in usedLttrs:
+                            letterAdd("h")
                 elif event.key == pygame.K_i:
                     if "i" not in usedLttrs:
-                        usedLttrs.append("i")
+                        if "i" not in usedLttrs:
+                            letterAdd("i")
                 elif event.key == pygame.K_j:
                     if "j" not in usedLttrs:
-                        usedLttrs.append("j")
+                        if "j" not in usedLttrs:
+                            letterAdd("j")
                 elif event.key == pygame.K_k:
                     if "k" not in usedLttrs:
-                        usedLttrs.append("k")
+                        if "k" not in usedLttrs:
+                            letterAdd("k")
                 elif event.key == pygame.K_l:
                     if "l" not in usedLttrs:
-                        usedLttrs.append("l")
+                        if "l" not in usedLttrs:
+                            letterAdd("l")
                 elif event.key == pygame.K_m:
                     if "m" not in usedLttrs:
-                        usedLttrs.append("m")
+                        if "m" not in usedLttrs:
+                            letterAdd("m")
                 elif event.key == pygame.K_n:
                     if "n" not in usedLttrs:
-                        usedLttrs.append("n")
+                        if "n" not in usedLttrs:
+                            letterAdd("n")
                 elif event.key == pygame.K_o:
                     if "o" not in usedLttrs:
-                        usedLttrs.append("o")
+                        if "o" not in usedLttrs:
+                            letterAdd("o")
                 elif event.key == pygame.K_p:
                     if "p" not in usedLttrs:
-                        usedLttrs.append("p")
+                        if "p" not in usedLttrs:
+                            letterAdd("p")
                 elif event.key == pygame.K_q:
                     if "q" not in usedLttrs:
-                        usedLttrs.append("q")
+                        if "q" not in usedLttrs:
+                            letterAdd("q")
                 elif event.key == pygame.K_r:
                     if "r" not in usedLttrs:
-                        usedLttrs.append("r")
+                        if "r" not in usedLttrs:
+                            letterAdd("r")
                 elif event.key == pygame.K_s:
                     if "s" not in usedLttrs:
-                        usedLttrs.append("s")
+                        if "s" not in usedLttrs:
+                            letterAdd("s")
                 elif event.key == pygame.K_t:
                     if "t" not in usedLttrs:
-                        usedLttrs.append("t")
+                        if "t" not in usedLttrs:
+                            letterAdd("t")
                 elif event.key == pygame.K_u:
                     if "u" not in usedLttrs:
-                        usedLttrs.append("u")
+                        if "u" not in usedLttrs:
+                            letterAdd("u")
                 elif event.key == pygame.K_v:
                     if "v" not in usedLttrs:
-                        usedLttrs.append("v")
+                        if "v" not in usedLttrs:
+                            letterAdd("v")
                 elif event.key == pygame.K_w:
                     if "w" not in usedLttrs:
-                        usedLttrs.append("w")
+                        if "w" not in usedLttrs:
+                            letterAdd("w")
                 elif event.key == pygame.K_x:
                     if "x" not in usedLttrs:
-                        usedLttrs.append("x")
+                        if "x" not in usedLttrs:
+                            letterAdd("x")
                 elif event.key == pygame.K_y:
                     if "y" not in usedLttrs:
-                        usedLttrs.append("y")
+                        if "y" not in usedLttrs:
+                            letterAdd("y")
                 elif event.key == pygame.K_z:
                     if "z" not in usedLttrs:
-                        usedLttrs.append("z")
+                        if "z" not in usedLttrs:
+                            letterAdd("z")
+
+
+        if badLttr == 1:
+            one = True
+        if badLttr == 2:
+            two = True
+        if badLttr == 3:
+            three = True
+        if badLttr == 4:
+            four = True
+        if badLttr == 5:
+            five = True
+        if badLttr == 6:
+            six = True
+
         screen.blit(manStand, (150, 60))
         if one:
             screen.blit(s1, (152, 90))
@@ -287,13 +327,71 @@ def game():
             screen.blit(s6, (152, 90))
             five = False
 
+
             
         # randomWord()
         # print(word)
         screen.blit(text, (0, 400))
+        screen.blit(text2, (15,500))
+        screen.blit(text3, (15, 550))
         pygame.display.update()
+
+        if letterCount == 0:
+            endScreen(True)
+
+        if six:
+            time.sleep(1)
+            endScreen(False)
 
 
     sys.exit(0)
+
+def endScreen(boolean):
+    global word
+
+    playAgain_img = pygame.image.load("data/pAgainBtn.png")
+    quit_img = pygame.image.load("data/quitBtn.png")
+
+    playAgain_button = Button(280, 480, playAgain_img, 0.3)
+    quit_button = Button(70, 480, quit_img, 0.3)
+
+    pygame.font.init()
+    font = pygame.font.SysFont("Comic Sans MS", 35)
+    font2 = pygame.font.SysFont("Comic Sans MS", 25)
+    
+    
+    
+
+    if boolean == False:
+        text = font.render("You Lose!", False, (255, 255, 255))
+        text2 = font2.render("The word was \"" + word + "\"", False, (255, 255, 255))
+    
+    if boolean == True:
+        text = font.render("You Win!", False, (255, 255, 255))
+        text2 = font2.render("The word is \"" + word + "\"", False, (255, 255, 255))
+    
+    running = True
+    while running:
+
+        
+
+        bg = pygame.image.load("data/bg.png")
+        screen.blit(bg, (0, 0))
+
+        if playAgain_button.draw():
+            game()
+        if quit_button.draw():
+            running = False
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+
+        screen.blit(text, (w/2-(text.get_width()/2), h/2-30))
+        # text_rect = text.get_rect(center=(w/2, 350))
+        screen.blit(text2, (w/2-(text2.get_width()/2), h/2+20))
+        pygame.display.update()
+    sys.exit(0)
 # mainMenu()
-game()
+mainMenu()
