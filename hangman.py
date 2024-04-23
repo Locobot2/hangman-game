@@ -406,4 +406,4 @@ def endScreen(boolean):
 
 mainMenu()
 
-#add a definition to the end screen for each word using web
+#add a definition to the end screen for each word using web+-
